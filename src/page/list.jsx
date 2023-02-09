@@ -1,11 +1,52 @@
 import React, { useState, useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
-
+import styled, { keyframes } from "styled-components";
 import styles from "./list.module.css";
 import Product from "./components/product";
 import Header from "./components/header";
 import { BsCart2 } from "react-icons/bs";
 import { RiLoader2Fill } from "react-icons/ri";
+
+const Main = styled.div`
+  display: flex;
+  justify-content: center;
+  background-color: var(--gray12);
+`;
+
+const Container = styled.div`
+  background: var(--gray1);
+  width: 100%;
+  max-width: 420px;
+  text-align: center;
+  min-height: 100vh;
+`;
+
+const Products = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  overflow-y: auto;
+
+  > div {
+    flex-basis: 30%;
+  }
+`;
+
+const spin = keyframes`
+    0%{
+      transform: rotate(0deg);
+    }
+    100% {
+      transform: rotate(360deg);
+    }
+  `;
+
+const LoadingSpinner = styled(RiLoader2Fill)`
+  margin: var(--spacer-s);
+  animation: ${spin} 1s linear infinite;
+  font-size: var(--font-size-xl);
+  color: var(--green11);
+`;
 
 const List = () => {
   const navigate = useNavigate();
@@ -53,14 +94,14 @@ const List = () => {
   }, [loading, count]);
 
   return (
-    <div className={styles.main}>
-      <div className={styles.container}>
+    <Main>
+      <Container>
         <Header
           title="shopping"
           right={<BsCart2 />}
           cartProductsNum={cartProductNum}
         />
-        <div className={styles.products}>
+        <Products>
           {products.map((product) => (
             <Product
               key={product.id}
@@ -74,10 +115,10 @@ const List = () => {
             />
           ))}
           <div ref={containerRef} />
-        </div>
-        <div>{loading && <RiLoader2Fill className={styles.loadingIcon} />}</div>
-      </div>
-    </div>
+        </Products>
+        <div>{loading && <LoadingSpinner />}</div>
+      </Container>
+    </Main>
   );
 };
 
