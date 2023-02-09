@@ -1,4 +1,4 @@
-.header {
+/* .header {
   display: flex;
 
   justify-content: space-between;
@@ -12,23 +12,23 @@
   background-color: var(--gray1);
   border-bottom: 1px solid var(--gray6);
   z-index: 1;
-}
-.title {
+} */
+/* .title {
   display: flex;
   align-items: center;
   justify-content: center;
   font-size: var(--font-size-l);
   font-weight: var(--font-weight-bold);
   color: var(--gray12);
-}
-.shoppingBasket {
+} */
+/* .shoppingBasket {
   position: relative;
   width: 20px;
   height: 20px;
   cursor: pointer;
-}
+} */
 
-.basketNum {
+/* .basketNum {
   position: absolute;
   background-color: var(--green11);
   border-radius: 50%;
@@ -40,19 +40,19 @@
   justify-content: center;
   align-items: center;
   padding: 1px;
-}
-.basketNum span {
+} */
+/* .basketNum span {
   position: absolute;
   font-size: 10px;
   color: var(--gray1);
-}
-.icon {
+} */
+/* .icon {
   font-size: var(--font-size-l);
   position: absolute;
-}
-.backBtn {
+} */
+/* .backBtn {
   border: none;
   background-color: transparent;
   font-size: var(--font-size-l);
   cursor: pointer;
-}
+} */
