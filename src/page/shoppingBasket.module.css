@@ -1,0 +1,107 @@
+.main {
+  display: flex;
+  justify-content: center;
+  background-color: var(--gray12);
+}
+.container {
+  background: var(--gray1);
+  width: 100%;
+  max-width: 420px;
+  text-align: center;
+  min-height: 100vh;
+}
+.products {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  overflow-y: auto;
+}
+
+.products > div {
+  flex-basis: 30%;
+}
+.totalPrice {
+  display: flex;
+  justify-content: space-between;
+  padding: 0px var(--spacer-l);
+  font-weight: var(--font-weight-bold);
+  font-size: var(--font-size-l);
+}
+.price {
+  color: var(--green11);
+}
+.productNum {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: var(--font-size-xs);
+  border: solid 1px var(--gray6);
+  background-color: var(--gray2);
+
+  border-radius: var(--radius-s);
+}
+.productNum button {
+  border: none;
+  border-radius: var(--radius-s);
+
+  padding: 0px var(--spacer-s);
+  background-color: var(--gray3);
+}
+.productNum span {
+  margin: 0px var(--spacer-s);
+}
+.delProductBtn {
+  position: absolute;
+  top: 0;
+  right: 0;
+  font-size: var(--font-size-s);
+  width: 15px;
+  height: 15px;
+  padding: 0;
+  box-sizing: content-box;
+  border: none;
+  margin: var(--spacer-s);
+  border-radius: var(--radius-s);
+  background-color: var(--gray2);
+}
+.delProductBtn :hover {
+  background-color: var(--gray6);
+
+  border-radius: var(--radius-s);
+}
+
+.empty {
+  position: relative;
+  -webkit-box-reflect: below -12px linear-gradient(transparent, rgba(0, 0, 0, 0.2));
+  margin-top: 50px;
+}
+.empty span {
+  position: relative;
+  display: inline-block;
+  color: var(--gray12);
+  font-size: var(--font-size-xl);
+}
+.first {
+  animation: animate 1.5s ease-in-out infinite;
+  animation-delay: 0.1s;
+}
+.second {
+  animation: animate 1.5s ease-in-out infinite;
+  animation-delay: 0.2s;
+}
+.third {
+  animation: animate 1.5s ease-in-out infinite;
+  animation-delay: 0.3s;
+}
+@keyframes animate {
+  0%,
+  100% {
+    transform: translateY(0px);
+  }
+  20% {
+    transform: translateY(-10px);
+  }
+  40% {
+    transform: translateY(0px);
+  }
+}

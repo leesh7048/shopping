@@ -1,0 +1,39 @@
+.main {
+  display: flex;
+  justify-content: center;
+  background-color: var(--gray12);
+}
+
+.container {
+  background: var(--gray1);
+  width: 100%;
+  max-width: 420px;
+  text-align: center;
+  min-height: 100vh;
+}
+.products {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  overflow-y: auto;
+}
+
+.products > div {
+  flex-basis: 30%;
+}
+
+.loadingIcon {
+  margin: var(--spacer-s);
+  animation: spin 1s linear infinite;
+  font-size: var(--font-size-xl);
+  color: var(--green11);
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}

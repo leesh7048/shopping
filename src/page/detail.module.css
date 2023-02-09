@@ -1,0 +1,58 @@
+.main {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: var(--gray12);
+}
+.container {
+  background: var(--gray1);
+  width: 100%;
+  max-width: 420px;
+  height: 100vh;
+  text-align: center;
+}
+.shoppingBasket {
+  width: 90%;
+  height: 50px;
+  border-radius: var(--radius-m);
+  border: none;
+  background-color: var(--green9);
+  color: white;
+  font-size: var(--font-size-m);
+  font-weight: var(--font-weight-bold);
+}
+.loading {
+  position: relative;
+  -webkit-box-reflect: below -12px linear-gradient(transparent, rgba(0, 0, 0, 0.2));
+  margin-top: 50px;
+}
+.loading span {
+  position: relative;
+  display: inline-block;
+  color: var(--gray12);
+  font-size: var(--font-size-xl);
+}
+.first {
+  animation: animate 1.5s ease-in-out infinite;
+  animation-delay: 0.1s;
+}
+.second {
+  animation: animate 1.5s ease-in-out infinite;
+  animation-delay: 0.2s;
+}
+.third {
+  animation: animate 1.5s ease-in-out infinite;
+  animation-delay: 0.3s;
+}
+@keyframes animate {
+  0%,
+  100% {
+    transform: translateY(0px);
+  }
+  20% {
+    transform: translateY(-10px);
+  }
+  40% {
+    transform: translateY(0px);
+  }
+}
