@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import styles from "./detail.module.css";
+
 import Header from "./components/header";
 import { BsCart2 } from "react-icons/bs";
 
@@ -8,6 +8,73 @@ import { BsArrowLeft } from "react-icons/bs";
 import Product from "./components/product";
 import { useSearchParams } from "react-router-dom";
 import { useCartProducts } from "./hooks/useCartProducts";
+import styled, { keyframes } from "styled-components";
+
+const Main = styled.div`
+  display: flex;
+  justify-content: center;
+  background-color: var(--gray12);
+`;
+
+const Container = styled.div`
+  background: var(--gray1);
+  width: 100%;
+  max-width: 420px;
+  text-align: center;
+  min-height: 100vh;
+`;
+
+const ShoppingBasket = styled.button`
+  width: 90%;
+  height: 50px;
+  border-radius: var(--radius-m);
+  border: none;
+  background-color: var(--green9);
+  color: white;
+  font-size: var(--font-size-m);
+  font-weight: var(--font-weight-bold);
+`;
+
+const animate = keyframes`
+   0%,
+  100% {
+    transform: translateY(0px);
+  }
+  20% {
+    transform: translateY(-10px);
+  }
+  40% {
+    transform: translateY(0px);
+  }
+`;
+
+const Loading = styled.div`
+  position: relative;
+  -webkit-box-reflect: below -12px linear-gradient(transparent, rgba(0, 0, 0, 0.2));
+  margin-top: 50px;
+  span {
+    position: relative;
+    display: inline-block;
+    color: var(--gray12);
+    font-size: var(--font-size-xl);
+    animation: ${animate} 1.5s ease-in-out infinite;
+
+    &:nth-child(1) {
+      animation-delay: 0.1s;
+    }
+    &:nth-child(2) {
+      animation-delay: 0.2s;
+    }
+    &:nth-child(3) {
+      animation-delay: 0.3s;
+    }
+  }
+`;
+
+const LoadingBox = styled.div`
+  display: flex;
+  justify-content: center;
+`;
 
 const Detail = (props) => {
   const [product, setProduct] = useState(null);
@@ -48,8 +115,8 @@ const Detail = (props) => {
   }, [searchParams]);
 
   return (
-    <div className={styles.main}>
-      <div className={styles.container}>
+    <Main>
+      <Container>
         <Header
           right={<BsCart2 />}
           left={<BsArrowLeft />}
@@ -65,25 +132,22 @@ const Detail = (props) => {
               tag={product.category}
               description={product.description}
             />
-            <button
-              className={styles.shoppingBasket}
-              onClick={addShoppingBasket}
-            >
+            <ShoppingBasket onClick={addShoppingBasket}>
               {isInCart ? "빼기" : "담기"}
-            </button>
+            </ShoppingBasket>
           </>
         )}
-        <div style={{ display: "flex", justifyContent: "center" }}>
+        <LoadingBox>
           {loading && (
-            <div className={styles.loading}>
-              <span className={styles.first}>로</span>
-              <span className={styles.second}>딩</span>
-              <span className={styles.third}>중</span>
-            </div>
+            <Loading>
+              <span>로</span>
+              <span>딩</span>
+              <span>중</span>
+            </Loading>
           )}
-        </div>
-      </div>
-    </div>
+        </LoadingBox>
+      </Container>
+    </Main>
   );
 };
 

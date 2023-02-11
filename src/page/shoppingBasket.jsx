@@ -1,12 +1,124 @@
 import React, { useEffect } from "react";
 import Header from "./components/header";
-import styles from "./shoppingBasket.module.css";
+
 import { IoIosClose } from "react-icons/io";
 
 import { BsArrowLeft } from "react-icons/bs";
 import { useCartProducts } from "./hooks/useCartProducts";
 
 import Product from "./components/product";
+import styled, { keyframes } from "styled-components";
+
+const Main = styled.div`
+  display: flex;
+  justify-content: center;
+  background-color: var(--gray12);
+`;
+
+const Container = styled.div`
+  background: var(--gray1);
+  width: 100%;
+  max-width: 420px;
+  text-align: center;
+  min-height: 100vh;
+`;
+
+const Products = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  overflow-y: auto;
+
+  > div {
+    flex-basis: 30%;
+  }
+`;
+
+const TotalPrice = styled.div`
+  display: flex;
+  justify-content: space-between;
+  padding: 0px var(--spacer-l);
+  font-weight: var(--font-weight-bold);
+  font-size: var(--font-size-l);
+`;
+const Price = styled.div`
+  color: var(--green11);
+`;
+const ProductNum = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: var(--font-size-xs);
+  border: solid 1px var(--gray6);
+  background-color: var(--gray2);
+  border-radius: var(--radius-s);
+
+  button {
+    border: none;
+    border-radius: var(--radius-s);
+    padding: 0px var(--spacer-s);
+    background-color: var(--gray3);
+  }
+  span {
+    margin: 0px var(--spacer-s);
+  }
+`;
+
+const DelProductBtn = styled.button`
+  position: absolute;
+  top: 0;
+  right: 0;
+  font-size: var(--font-size-s);
+  width: 15px;
+  height: 15px;
+  padding: 0;
+  box-sizing: content-box;
+  border: none;
+  margin: var(--spacer-s);
+  border-radius: var(--radius-s);
+  background-color: var(--gray2);
+
+  &:hover {
+    background-color: var(--gray6);
+    border-radius: var(--radius-s);
+  }
+`;
+
+const animate = keyframes`
+   0%,
+  100% {
+    transform: translateY(0px);
+  }
+  20% {
+    transform: translateY(-10px);
+  }
+  40% {
+    transform: translateY(0px);
+  }
+`;
+
+const Empty = styled.div`
+  position: relative;
+  -webkit-box-reflect: below -12px linear-gradient(transparent, rgba(0, 0, 0, 0.2));
+  margin-top: 50px;
+  span {
+    position: relative;
+    display: inline-block;
+    color: var(--gray12);
+    font-size: var(--font-size-xl);
+    animation: ${animate} 1.5s ease-in-out infinite;
+
+    &:nth-child(1) {
+      animation-delay: 0.1s;
+    }
+    &:nth-child(2) {
+      animation-delay: 0.2s;
+    }
+    &:nth-child(3) {
+      animation-delay: 0.3s;
+    }
+  }
+`;
 
 const ShoppingBasket = (props) => {
   const [cartProducts, setCartProducts] = useCartProducts();
@@ -23,11 +135,11 @@ const ShoppingBasket = (props) => {
   console.log(cartProducts);
 
   return (
-    <div className={styles.main}>
-      <div className={styles.container}>
+    <Main>
+      <Container>
         <Header left={<BsArrowLeft />} title="shoppingBasket" />
         {cartProducts.length ? (
-          <div className={styles.products}>
+          <Products>
             {cartProducts.map((product) => {
               const minusBtn = () => {
                 if (product.num <= 1) return;
@@ -83,39 +195,36 @@ const ShoppingBasket = (props) => {
                   tag={product.category}
                   productImg={product.image}
                   quantityInfo={
-                    <div className={styles.productNum}>
+                    <ProductNum>
                       <button onClick={minusBtn}>-</button>
                       <span>{product.num}</span>
                       <button onClick={pluseBtn}>+</button>
-                    </div>
+                    </ProductNum>
                   }
                   delBtn={
-                    <button
-                      className={styles.delProductBtn}
-                      onClick={delProduct}
-                    >
+                    <DelProductBtn onClick={delProduct}>
                       <IoIosClose />
-                    </button>
+                    </DelProductBtn>
                   }
                 />
               );
             })}
-          </div>
+          </Products>
         ) : (
-          <div className={styles.empty}>
-            <span className={styles.first}>비</span>
-            <span className={styles.second}>었</span>
-            <span className={styles.third}>음</span>
-          </div>
+          <Empty>
+            <span>비</span>
+            <span>었</span>
+            <span>음</span>
+          </Empty>
         )}
         {cartProducts.length ? (
-          <div className={styles.totalPrice}>
+          <TotalPrice>
             <span>총 결제 금액</span>
-            <span className={styles.price}>{totalPrice}</span>
-          </div>
+            <Price>{totalPrice}</Price>
+          </TotalPrice>
         ) : null}
-      </div>
-    </div>
+      </Container>
+    </Main>
   );
 };
 

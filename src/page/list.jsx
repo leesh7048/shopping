@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import styled, { keyframes } from "styled-components";
-import styles from "./list.module.css";
+
 import Product from "./components/product";
 import Header from "./components/header";
 import { BsCart2 } from "react-icons/bs";
