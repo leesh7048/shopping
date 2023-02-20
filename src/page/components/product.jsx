@@ -16,7 +16,6 @@ const StyledProduct = styled.div`
 const ProductImg = styled.img`
   width: 120px;
   height: 120px;
-  background: #d9d9d9;
   border-radius: var(--radius-m);
 `;
 
@@ -67,8 +66,12 @@ const ProductTag = styled.div`
 `;
 const Description = styled.div`
   font-size: var(--font-size-xs);
+  background-color: var(--gray1);
+  border-radius: 3px;
   width: 120px;
   text-align: start;
+  color: var(--gray12);
+
   ${({ state }) =>
     state === "3줄이상펼쳐보기전" &&
     `
