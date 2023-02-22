@@ -1,10 +1,7 @@
 import React, { useEffect, useState } from "react";
-
 import Header from "./components/header";
 import { BsCart2 } from "react-icons/bs";
-
 import { BsArrowLeft } from "react-icons/bs";
-
 import Product from "./components/product";
 import { useSearchParams } from "react-router-dom";
 import { useCartProducts } from "./hooks/useCartProducts";
@@ -79,10 +76,8 @@ const LoadingBox = styled.div`
 const Detail = (props) => {
   const [product, setProduct] = useState(null);
   const [loading, setLoading] = useState(false);
-
   const [searchParams] = useSearchParams();
   const [cartProducts, setCartProducts] = useCartProducts();
-
   const isInCart = product && cartProducts.some(({ id }) => id === product.id);
 
   // 필요한 변수
