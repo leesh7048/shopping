@@ -1,11 +1,11 @@
 import React, { useState, useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import styled, { keyframes } from "styled-components";
-
 import Product from "./components/product";
 import Header from "./components/header";
 import { BsCart2 } from "react-icons/bs";
 import { RiLoader2Fill } from "react-icons/ri";
+import { useCartProducts } from "./hooks/useCartProducts";
 
 const Main = styled.div`
   display: flex;
@@ -14,6 +14,7 @@ const Main = styled.div`
 `;
 
 const Container = styled.div`
+  position: relative;
   background: var(--gray1);
   width: 100%;
   max-width: 420px;
@@ -54,13 +55,15 @@ const List = () => {
   const [loading, setLoading] = useState(false);
   const [products, setProducts] = useState([]);
   const [count, setCount] = useState(10);
+
   const containerRef = useRef();
 
   const productClick = (productId) => {
     navigate(`/detail?id=${productId}`);
   };
+  const [cartProducts] = useCartProducts();
 
-  const cartProductNum = JSON.parse(localStorage.getItem("products")).length;
+  const cartProductNum = cartProducts.length;
 
   useEffect(() => {
     if (count >= 20) return;
@@ -101,6 +104,7 @@ const List = () => {
           right={<BsCart2 />}
           cartProductsNum={cartProductNum}
         />
+
         <Products>
           {products.map((product) => (
             <Product
