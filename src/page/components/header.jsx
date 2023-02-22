@@ -1,7 +1,7 @@
 import React from "react";
-
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
+import DarkModeBtn from "./darkModeBtn";
 
 const ShopHeader = styled.header`
   display: flex;
@@ -20,10 +20,12 @@ const ShopHeader = styled.header`
 `;
 
 const BackBtn = styled.button`
+  pointer-events: ${({ left }) => !left && "none"};
   border: none;
   background-color: transparent;
   font-size: var(--font-size-l);
   cursor: pointer;
+  color: var(--gray12);
 `;
 
 const Title = styled.div`
@@ -36,17 +38,20 @@ const Title = styled.div`
 `;
 
 const ShoppingBasket = styled.div`
+  display: ${({ right }) => !right && "none"};
   position: relative;
   width: 20px;
   height: 20px;
+  margin-left: var(--spacer-m);
   cursor: pointer;
 `;
 
 const CartIcon = styled.div`
   font-size: var(--font-size-l);
   position: absolute;
+  color: var(--gray12);
 `;
-const BackNum = styled.div`
+const BasketNum = styled.div`
   position: absolute;
   background-color: var(--green11);
   border-radius: 50%;
@@ -65,6 +70,9 @@ const BackNum = styled.div`
     color: var(--gray1);
   }
 `;
+const BtnBox = styled.div`
+  display: flex;
+`;
 
 const Header = ({ title, left, right, cartProductsNum }) => {
   const navigate = useNavigate();
@@ -72,6 +80,7 @@ const Header = ({ title, left, right, cartProductsNum }) => {
   return (
     <ShopHeader>
       <BackBtn
+        left={left}
         onClick={() => {
           navigate(-1);
         }}
@@ -79,18 +88,20 @@ const Header = ({ title, left, right, cartProductsNum }) => {
         {left}
       </BackBtn>
       <Title>{title}</Title>
-      <ShoppingBasket
-        onClick={() => {
-          navigate(`/shoppingBasket`);
-        }}
-      >
-        <CartIcon>{right}</CartIcon>
-        {right && (
-          <BackNum>
+      <BtnBox>
+        <DarkModeBtn />
+        <ShoppingBasket
+          right={right}
+          onClick={() => {
+            navigate(`/shoppingBasket`);
+          }}
+        >
+          <CartIcon>{right}</CartIcon>
+          <BasketNum>
             <span>{cartProductsNum}</span>
-          </BackNum>
-        )}
-      </ShoppingBasket>
+          </BasketNum>
+        </ShoppingBasket>
+      </BtnBox>
     </ShopHeader>
   );
 };
