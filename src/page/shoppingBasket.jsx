@@ -1,11 +1,10 @@
-import React, { useEffect } from "react";
+import React from "react";
 import Header from "./components/header";
 
 import { IoIosClose } from "react-icons/io";
-
 import { BsArrowLeft } from "react-icons/bs";
+import { BiPlus, BiMinus } from "react-icons/bi";
 import { useCartProducts } from "./hooks/useCartProducts";
-
 import Product from "./components/product";
 import styled, { keyframes } from "styled-components";
 
@@ -40,6 +39,9 @@ const TotalPrice = styled.div`
   padding: 0px var(--spacer-l);
   font-weight: var(--font-weight-bold);
   font-size: var(--font-size-l);
+  span {
+    color: var(--gray12);
+  }
 `;
 const Price = styled.div`
   color: var(--green11);
@@ -49,15 +51,21 @@ const ProductNum = styled.div`
   justify-content: center;
   align-items: center;
   font-size: var(--font-size-xs);
-  border: solid 1px var(--gray6);
-  background-color: var(--gray2);
+  border: solid 1px var(--gray8);
+  background-color: var(--gray3);
   border-radius: var(--radius-s);
+  color: var(--gray12);
 
   button {
     border: none;
     border-radius: var(--radius-s);
     padding: 0px var(--spacer-s);
-    background-color: var(--gray3);
+    background-color: var(--gray1);
+    color: var(--gray12);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 13px;
   }
   span {
     margin: 0px var(--spacer-s);
@@ -129,11 +137,6 @@ const ShoppingBasket = (props) => {
       .map((product) => product.price * product.num)
       .reduce((a, b) => a + b);
 
-  useEffect(() => {
-    window.addEventListener("storage", (e) => console.log(e));
-  }, []);
-  console.log(cartProducts);
-
   return (
     <Main>
       <Container>
@@ -196,9 +199,13 @@ const ShoppingBasket = (props) => {
                   productImg={product.image}
                   quantityInfo={
                     <ProductNum>
-                      <button onClick={minusBtn}>-</button>
+                      <button onClick={minusBtn}>
+                        <BiMinus />
+                      </button>
                       <span>{product.num}</span>
-                      <button onClick={pluseBtn}>+</button>
+                      <button onClick={pluseBtn}>
+                        <BiPlus />
+                      </button>
                     </ProductNum>
                   }
                   delBtn={
