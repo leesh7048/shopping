@@ -84,7 +84,8 @@ const DelProductBtn = styled.button`
   border: none;
   margin: var(--spacer-s);
   border-radius: var(--radius-s);
-  background-color: var(--gray2);
+  color: var(--gray12);
+  background-color: var(--gray7);
 
   &:hover {
     background-color: var(--gray6);
@@ -135,7 +136,8 @@ const ShoppingBasket = (props) => {
     cartProducts.length > 0 &&
     cartProducts
       .map((product) => product.price * product.num)
-      .reduce((a, b) => a + b);
+      .reduce((a, b) => a + b)
+      .toFixed(2);
 
   return (
     <Main>
