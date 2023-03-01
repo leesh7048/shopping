@@ -51,12 +51,11 @@ const LoadingSpinner = styled(RiLoader2Fill)`
 
 const List = () => {
   const navigate = useNavigate();
-
   const [loading, setLoading] = useState(false);
   const [products, setProducts] = useState([]);
   const [count, setCount] = useState(10);
 
-  const containerRef = useRef();
+  const bottomLineRef = useRef();
 
   const productClick = (productId) => {
     navigate(`/detail?id=${productId}`);
@@ -79,20 +78,21 @@ const List = () => {
 
   useEffect(() => {
     if (count >= 20) return;
-    const option = {};
+
     const handleObserver = (entries) => {
       entries.forEach((entry) => {
+        //isIntersecting:대상 요소가 현재 루트 요소 또는 뷰포트와 교차하는지 여부를 나타내는 boolean 값
         if (!entry.isIntersecting) return;
         if (loading) return;
         setCount((prev) => prev + 2);
       });
     };
-    const observer = new IntersectionObserver(handleObserver, option);
-    const containerElement = containerRef.current;
-    observer.observe(containerElement);
+    const observer = new IntersectionObserver(handleObserver);
+    const bottomLineElement = bottomLineRef.current;
+    observer.observe(bottomLineElement);
 
     return () => {
-      observer.disconnect(containerElement);
+      observer.disconnect(bottomLineElement);
     };
   }, [loading, count]);
 
@@ -118,7 +118,7 @@ const List = () => {
               }}
             />
           ))}
-          <div ref={containerRef} />
+          <div ref={bottomLineRef} />
         </Products>
         <div>{loading && <LoadingSpinner />}</div>
       </Container>
